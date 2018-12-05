@@ -25,7 +25,7 @@ laneSchema.pre('findOne', populateNotes);
 //laneSchema.pre('remove', populateNotes);
 //-------- quest end
 //Kodilla quest 4
-laneSchema.pre('findOneAndUpdate', populateNote);
+laneSchema.pre('findOneAndUpdate', populateNotes);
 //---- quest end
 
 export default mongoose.model('Lane', laneSchema);
