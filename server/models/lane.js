@@ -18,7 +18,14 @@ function populateNotes(next) {
     this.populate('notes');
     next();
 }
-  
+
 laneSchema.pre('find', populateNotes);
 laneSchema.pre('findOne', populateNotes);
+// kodilla quest 2 ---------
+//laneSchema.pre('remove', populateNotes);
+//-------- quest end
+//Kodilla quest 4
+laneSchema.pre('findOneAndUpdate', populateNote);
+//---- quest end
+
 export default mongoose.model('Lane', laneSchema);

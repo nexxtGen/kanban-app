@@ -39,11 +39,23 @@ export function deleteLane(req, res) {
     if (err) {
       res.status(500).send(err);
     }
-
+    //delete notes in lane- kodilla quest 2.------
+    if (lane.notes.length) {
+			lane.notes.forEach(note => note.remove());
+    }
+    //-----
     lane.remove(() =>{
       res.status(200).end();
     })
   })
 }
-
+//kodilla quest edit name of lane
+export function editLane(req, res) {
+  Lane.findOneAndUpdate({ id: req.params.laneId }, { $set: { name: req.body.name}}, {new: true}).exec((err, lane) =>{
+    if (err) {
+      res.status(500).send(err);
+    }
+    res.json({ lane });
+  })
+}
 

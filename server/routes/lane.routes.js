@@ -12,4 +12,8 @@ router.route('/lanes').post(LaneController.addLane);
 //delete Lane
 router.route('/lanes/:laneId').delete(LaneController.deleteLane);
 
+//Kodilla quest edit lane name
+router.route('/lanes/:laneId').put(LaneController.editLane);
+
+
 export default router;

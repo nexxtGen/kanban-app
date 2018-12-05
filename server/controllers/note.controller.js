@@ -29,3 +29,26 @@ export function addNote(req, res) {
       });
   });
 }
+// Quest by kodilla
+//delete single note - kodilla quest 1
+export function deleteNote(req, res) {
+  Note.findOne({ id: req.params.noteId}).exec((err, note) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+
+    note.remove(() => {
+      res.status(200).end();
+    })
+  })
+}
+//quest edit note 
+export function editNote(req, res) {
+	Note.findOneAndUpdate({ id: req.params.noteId }, { $set: {task: req.body.task} }, {new: true}).exec((err, note) => {
+		if (err) {
+			res.status(500).send(err);
+		}
+		res.json({ note });
+	});
+}
+
