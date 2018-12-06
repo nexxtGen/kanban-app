@@ -1,4 +1,5 @@
 import uuid from 'uuid';
+import callApi from '../../util/apiCaller';
 
 // Export Constants
 export const CREATE_LANE = 'CREATE_LANE';
@@ -9,6 +10,7 @@ export const EDIT_LANE = 'EDIT_LANE';
 
 export function createLane(lane) {
     return {
+        type: CREATE_LANE,
         lane: {
             id: uuid(),
             notes: [],

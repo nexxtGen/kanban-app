@@ -10,15 +10,18 @@ import styles from './Kanban.css';
 //import styles from '../Lane/Lane.css'
 
 const Kanban = (props) => {
-  <div>
-    <button className={styles.AddLane} onClick={() => props.createLane({ name: 'New lane'}) }>Add lane</button>
-    <Lanes lanes={props.lanes} />
-  </div>
-}
+  return (
+    <div>
+      <h3>Tablica Kanban</h3>
+      <button className={styles.AddLane} onClick={() => props.createLane({ name: 'New lane',}) }>Add lane</button>
+      <Lanes lanes={props.lanes} />
+    </div>
+  );
+};
 // Achtung! Wyjaśnienie i sama metoda w dalszej części kursu.
 //Kanban.need = [() => { return fetchLanes(); }];
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   lanes: state.lanes,
 });
 

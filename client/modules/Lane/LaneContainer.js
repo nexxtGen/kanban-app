@@ -15,7 +15,4 @@ const mapDispatchToProps =  {
   addNote: createNote,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Lane);
+export default connect( mapStateToProps, mapDispatchToProps)(Lane);
