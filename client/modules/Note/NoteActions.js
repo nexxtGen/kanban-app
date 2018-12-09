@@ -19,8 +19,8 @@ export function createNotes(notesData) {
 export function createNote(note, laneId) {
     return {
         type: CREATE_NOTE,
-        laneId,
         note,
+        laneId,
     };
 }
 
@@ -38,7 +38,15 @@ export function createNoteRequest(note, laneId) {
         note,
     };
 }
-  
+
+export function updateNoteRequest(note) {
+	return dispatch => {
+		return callApi(`notes/${note.id}`, 'put', { note }).then(() => {  ////// return kudła
+			dispatch(updateNote(note)); /// kudła!!!!
+		});
+	};
+}
+
   export function deleteNote(noteId, laneId) {
     return {
         type: DELETE_NOTE,
@@ -47,6 +55,13 @@ export function createNoteRequest(note, laneId) {
     };
 }
 
+export function deleteNoteRequest(noteId, laneId) {
+	return (dispatch) => {
+		return callApi(`notes/${noteId}`, 'delete').then(() => {  // #returnlivesmatter!!!!
+			dispatch(deleteNote(noteId, laneId));
+		});
+	};
+}
 export function editNote(noteId) {
 	return {
 		type: EDIT_NOTE,

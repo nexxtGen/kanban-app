@@ -4,13 +4,13 @@ import styles from './Edit.css';
 
 export default class Edit extends Component {
     //if user press enter => then. run method finishEdit
-    checkEnter = event => {
-        if (event.key === 'Enter') {
-            this.finishEdit(event);
+    checkEnter = e => {
+        if (e.key === 'Enter') {
+            this.finishEdit(e);
         }
     }
-    finishEdit = event => {
-        const value = event.target.value;
+    finishEdit = e => {
+        const value = e.target.value;
         if (this.props.onUpdate) {
             this.props.onUpdate(value.trim());
         }
@@ -20,7 +20,7 @@ export default class Edit extends Component {
     }
     renderValue = () => {        
         const { value, onDelete, onValueClick } = this.props;
-        console.log('kurwa value', value);
+        
         return (
             <div>
                 <span className={styles.wartosc} onClick={onValueClick}>{value}</span>

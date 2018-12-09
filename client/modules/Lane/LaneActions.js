@@ -11,6 +11,7 @@ export const UPDATE_LANE = 'UPDATE_LANE';
 export const DELETE_LANE = 'DELETE_LANE';
 export const EDIT_LANE = 'EDIT_LANE';
 export const CREATE_LANES = 'CREATE_LANES';
+export const FETCH_LANES = "FETCH_LANES";
 
 // Export Actions
 
@@ -38,18 +39,35 @@ export function updateLane(lane) {
         lane,
     };
 }
-  
+
+//Q
+export function updateLaneRequest(lane) {
+	return dispatch => {
+		return callApi(`lanes/${lane.id}`, 'put',  lane ).then(() => { /// eee
+			dispatch(updateLane(lane)); // !!
+		});
+	};
+}
+
 export function deleteLane(laneId) {
     return {
         type: DELETE_LANE,
         laneId
     };
 }
+//quest
+export function deleteLaneRequest(laneId) {
+    return (dispatch) => {  // brak returna było
+      return callApi(`lanes/${laneId}`, 'delete').then(() => {
+        dispatch(deleteLane(laneId));
+      });
+    };
+  }
 //kodilla quest tryb edit column/lane
 export function editLane(laneId) {
     return {
         type: EDIT_LANE,
-        laneId
+        id: laneId  // !!!!!!!!!!!!!!!!!!!! kudła!
     }
 }
 //v3 integration. Endpoint methods
@@ -65,7 +83,7 @@ export function fetchLanes() {
     return (dispatch) => {
       return callApi('lanes').then(res => {
         const normalized = normalize(res.lanes, lanes);
-        const {lanes: normalizedLanes} = normalized.entities;
+        const {lanes: normalizedLanes, notes} = normalized.entities;
         dispatch(createLanes(normalizedLanes));
         dispatch(createNotes(notes));
       });

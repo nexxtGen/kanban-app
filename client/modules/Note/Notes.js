@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Note from './Note';
 import styles from './Note.css';
 
-import Edit from '../../components/Edit'
+import Edit from '../../components/Edit';
 
 const Notes = ({ notes, laneId, editNote, updateNote, deleteNote } ) => {
     return (
@@ -24,7 +24,8 @@ const Notes = ({ notes, laneId, editNote, updateNote, deleteNote } ) => {
                       editing: false,
                     }
                   )}
-                  onDelete={() => deleteNote(note.id, laneId)}
+                  onDelete={ () => deleteNote(note.id , laneId)}
+                  
                 />
               </Note>                   
             )}

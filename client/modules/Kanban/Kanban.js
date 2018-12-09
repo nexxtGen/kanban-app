@@ -22,11 +22,12 @@ const Kanban = (props) => {
 Kanban.need = [() => { return fetchLanes(); }];
 
 const mapStateToProps = state => ({
-  lanes: Object.values(state.lanes) //v3 integration
+  lanes: Object.values(state.lanes), //v3 integration
 });
 
 const mapDispatchToProps =  {
   createLane: createLaneRequest,
+  fetchLanes
 };
 
 Kanban.propTypes = {
@@ -34,8 +35,5 @@ Kanban.propTypes = {
   createLane: PropTypes.func,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Kanban);
+export default connect( mapStateToProps, mapDispatchToProps)(Kanban);
 
