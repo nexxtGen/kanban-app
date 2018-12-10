@@ -12,9 +12,9 @@ import styles from './Kanban.css';
 const Kanban = (props) => {
   return (
     <div>
-      <h3>Tablica Kanban</h3>
-      <button className={styles.AddLane} onClick={() => props.createLane({ name: 'New lane',}) }>Add lane</button>
-      <Lanes lanes={props.lanes} />
+      <h3 className={styles.hTitle}>Tablica Kanban</h3>
+      <button className="AddLane" onClick={() => props.createLane({ name: 'New lane',}) }>Add lane</button>
+      <Lanes lanes={props.lanes}/>
     </div>
   );
 };
