@@ -14,6 +14,8 @@ import Footer from './components/Footer/Footer';
 import { toggleAddPost } from './AppActions';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
 
+import { laneError } from '../../modules/Lane/LaneActions';
+
 let DevTools;
 if (process.env.NODE_ENV === 'development') {
   // eslint-disable-next-line global-require
@@ -28,6 +30,7 @@ export class App extends Component {
 
   componentDidMount() {
     this.setState({isMounted: true}); // eslint-disable-line
+    //this.props.dispatch(app);
   }
 
   toggleAddPostSection = () => {
@@ -35,6 +38,15 @@ export class App extends Component {
   };
 
   render() {
+    /*
+    const isError = this.props.app.laneError;
+    if (isError) {
+      const error = 'errorrrr!!!!';
+    } else {
+      const error = 'brak errrrrooooorrr!';
+    } */
+    console.log('console Lane err', this.props.app.laneError );
+    console.log('console Lane err Body:', this.props.app.laneErrorBody);
     return (
       <div>
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}
@@ -58,7 +70,9 @@ export class App extends Component {
             switchLanguage={lang => this.props.dispatch(switchLanguage(lang))}
             intl={this.props.intl}
             toggleAddPost={this.toggleAddPostSection}
-          />
+            laneError={this.props.app.laneError}
+          /> 
+          
           <div className={styles.container}>
             {this.props.children}
           </div>
@@ -72,13 +86,14 @@ export class App extends Component {
 App.propTypes = {
   children: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.object.isRequired,  
 };
 
 // Retrieve data from store as props
 function mapStateToProps(store) {
   return {
     intl: store.intl,
+    app: store.app,
   };
 }
 

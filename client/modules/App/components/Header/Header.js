@@ -11,9 +11,24 @@ export function Header(props, context) {
     lang => <li key={lang} onClick={() => props.switchLanguage(lang)} className={lang === props.intl.locale ? styles.selected : ''}>{lang}</li>
   );
 
+  //----err handler
+  console.log('console props.laneError in header:', props.laneError);
+  const isError = props.laneError;
+    let isErrorMessage;
+
+    if (isError) {
+      isErrorMessage = 'Błąd ładowania kolumn';
+    } else {
+      isErrorMessage = "it's ok";
+    }
+
   return (
     <div className={styles.header}>
       <div className={styles['language-switcher']}>
+        <div>
+          <h3>Errors log: {isErrorMessage}</h3>
+          
+        </div>
         <ul>
           <li><FormattedMessage id="switchLanguage" /></li>
           {languageNodes}
@@ -40,7 +55,7 @@ Header.contextTypes = {
 Header.propTypes = {
   toggleAddPost: PropTypes.func.isRequired,
   switchLanguage: PropTypes.func.isRequired,
-  intl: PropTypes.object.isRequired,
+  intl: PropTypes.object.isRequired,  
 };
 
 export default Header;

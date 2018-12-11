@@ -13,6 +13,9 @@ export const EDIT_LANE = 'EDIT_LANE';
 export const CREATE_LANES = 'CREATE_LANES';
 export const FETCH_LANES = "FETCH_LANES";
 
+export const LANE_ERROR = "LANE_ERROR";
+export const LANE_NO_ERROR = "LANE_NO_ERROR";
+
 // Export Actions
 
 export function createLane(lane) {
@@ -85,7 +88,23 @@ export function fetchLanes() {
         const normalized = normalize(res.lanes, lanes);
         const {lanes: normalizedLanes, notes} = normalized.entities;
         dispatch(createLanes(normalizedLanes));
-        dispatch(createNotes(notes));
-      });
+        dispatch(createNotes(notes));  
+        dispatch(laneNoError());      
+      }).catch( err => {
+          console.log('Fetch Lanes err: ', err);
+          dispatch(laneError(err));
+      })
     };
+}
+
+export function laneError(err) {
+    return {
+        type: LANE_ERROR,        
+        err      
+    }
+}
+export function laneNoError() {
+    return {
+        type: LANE_NO_ERROR, 
+    }
 }
