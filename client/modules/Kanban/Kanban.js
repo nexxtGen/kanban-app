@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Lanes from '../Lane/Lanes';
 
-import { createLane } from '../Lane/LaneActions'; //import action creator to add new lane
+import { createLaneRequest, fetchLanes } from '../Lane/LaneActions';//import action creator to add new lane
 
 // Import Style
 import styles from './Kanban.css';
@@ -12,21 +12,22 @@ import styles from './Kanban.css';
 const Kanban = (props) => {
   return (
     <div>
-      <h3>Tablica Kanban</h3>
-      <button className={styles.AddLane} onClick={() => props.createLane({ name: 'New lane',}) }>Add lane</button>
-      <Lanes lanes={props.lanes} />
+      <h3 className={styles.hTitle}>Tablica Kanban</h3>
+      <button className="AddLane" onClick={() => props.createLane({ name: 'New lane',}) }>Add lane</button>
+      <Lanes lanes={props.lanes}/>
     </div>
   );
 };
 // Achtung! Wyjaśnienie i sama metoda w dalszej części kursu.
-//Kanban.need = [() => { return fetchLanes(); }];
+Kanban.need = [() => { return fetchLanes(); }];
 
 const mapStateToProps = state => ({
-  lanes: state.lanes,
+  lanes: Object.values(state.lanes), //v3 integration
 });
 
 const mapDispatchToProps =  {
-  createLane,
+  createLane: createLaneRequest,
+  fetchLanes
 };
 
 Kanban.propTypes = {
@@ -34,8 +35,5 @@ Kanban.propTypes = {
   createLane: PropTypes.func,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Kanban);
+export default connect( mapStateToProps, mapDispatchToProps)(Kanban);
 

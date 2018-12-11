@@ -51,7 +51,7 @@ export function deleteLane(req, res) {
 }
 //kodilla quest edit name of lane
 export function editLane(req, res) {
-  Lane.findOneAndUpdate({ id: req.params.laneId }, { $set: { name: req.body.name}}, {new: true}).exec((err, lane) =>{
+  Lane.findOneAndUpdate({ id: req.params.laneId }, { $set: { name: req.body.name}}, {new: true}).exec((err, lane) => {
     if (err) {
       res.status(500).send(err);
     }
