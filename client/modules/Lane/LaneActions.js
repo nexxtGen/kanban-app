@@ -119,3 +119,11 @@ export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
     sourceLaneId,
   };
 }
+
+export function moveBetweenLanesRequest(targetLaneId, noteId, sourceLaneId) {
+    return (dispatch) => {
+        return callApi (`lanes/${sourceLaneId}/moveBetween`, 'put', {targetLaneId, noteId} ).then(() =>{
+            dispatch(moveBetweenLanes(targetLaneId, noteId, sourceLaneId));
+        })
+    }
+}

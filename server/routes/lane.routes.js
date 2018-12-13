@@ -15,5 +15,7 @@ router.route('/lanes/:laneId').delete(LaneController.deleteLane);
 //Kodilla quest edit lane name
 router.route('/lanes/:laneId').put(LaneController.editLane);
 
+//Kodilla quest move note netweenLane
+router.route('/lanes/:laneId/moveBetween').put(LaneController.moveBetweenLanes);
 
 export default router;

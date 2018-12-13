@@ -59,3 +59,34 @@ export function editLane(req, res) {
   })
 }
 
+// kodilla q
+export function moveBetweenLanes(req, res) {
+  Lane.findOne({ id: req.params.laneId }).exec((err, lane) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+    //spr w robo str lany
+    //1. muszę znaleźć w tablicy lane.notes element z req.body.noteId
+    //2. Muszę zachować ten element w zmiennej
+    //3. naastępnie musze usunąć z ten element ze starej tablicy
+    //4 Nastepnie znaleźć docelową lanę
+    //5. Przeniesć element pushem do tablicy notes targetowanej lany
+    const targetNote = lane.notes.find( note => note.id === req.body.noteId); //1, 2
+    lane.notes.map(note => note.id !== req.body.noteId ); //3
+    lane.save(err => {
+      if (err) {
+				res.status(500).send(err);
+			}
+			res.json(lane);
+    });
+
+    Lane.findOne({ id: req.body.targetLaneId}).then(target => { //4
+      target.notes.push(targetNote); //5
+      target.save(err => {
+        if (err) {
+					res.status(500).send(err);
+				}
+      });
+    });
+  });
+}
