@@ -14,18 +14,23 @@ class Note extends React.Component {
     this.props = props;
   }
   render() {
-    const {connectDragSource, isDragging,
+    const {connectDragSource, connectDropTarget, isDragging,
       editing, children} = this.props;
 
     // jeśli edytujemy to przepuszczamy komponent (uniemożliwiamy tym samym przeciąganie komponentu edytowanego)
     const dragSource = editing ? a => a : connectDragSource;
 
-    return dragSource(
-      <li className={styles.Note}
+    return dragSource(connectDropTarget(
+      <li
+        className={styles.Note}
         style={{
-        opacity: isDragging ? 0 : 1
-      }} >{children}</li>
-    );
+          opacity: isDragging ? 0 : 1,
+        }}
+      >
+        {children}
+      </li>
+    )); 
+ 
   }
 }
 
