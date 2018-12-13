@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import Lane from './Lane';
-// import action creators
-//import * as laneActions from './LaneActions';
-//import { createNote } from '../Note/NoteActions';
+//d&d
+import { compose } from 'redux';
+import { DropTarget } from 'react-dnd';
+import ItemTypes from '../Kanban/itemTypes';
 
-import { deleteLaneRequest, updateLaneRequest, createLaneRequest, editLane } from './LaneActions';
+
+import { deleteLaneRequest, updateLaneRequest, createLaneRequest, editLane, moveBetweenLanes } from './LaneActions';
 import { createNoteRequest } from '../Note/NoteActions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -25,7 +27,33 @@ const mapDispatchToProps =  {
   deleteLane: deleteLaneRequest,
   updateLane: updateLaneRequest,
   addNote: createNoteRequest,
-  createLane: createLaneRequest,  
+  createLane: createLaneRequest, 
+  moveBetweenLanes, 
 };
 
-export default connect( mapStateToProps, mapDispatchToProps)(Lane);
+//d and d
+const noteTarget = {
+  hover(targetProps, monitor) {
+    const sourceProps = monitor.getItem();
+    const { id: noteId, laneId: sourceLaneId } = sourceProps;
+ 
+    if (!targetProps.lane.notes.length) {
+      targetProps.moveBetweenLanes(
+        targetProps.lane.id,
+        noteId,
+        sourceLaneId,
+      );
+    }
+  },
+ };
+
+
+
+
+//d and d
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  DropTarget(ItemTypes.NOTE, noteTarget, (dragConnect) => ({
+    connectDropTarget: dragConnect.dropTarget()
+  }))
+)(Lane);

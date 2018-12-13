@@ -15,6 +15,7 @@ export const FETCH_LANES = "FETCH_LANES";
 
 export const LANE_ERROR = "LANE_ERROR";
 export const LANE_NO_ERROR = "LANE_NO_ERROR";
+export const MOVE_BETWEEN_LANES = 'MOVE_BETWEEN_LANES';
 
 // Export Actions
 
@@ -107,4 +108,14 @@ export function laneNoError() {
     return {
         type: LANE_NO_ERROR, 
     }
+}
+
+//d&d
+export function moveBetweenLanes(targetLaneId, noteId, sourceLaneId) {
+  return {
+    type: MOVE_BETWEEN_LANES,
+    targetLaneId,
+    noteId,
+    sourceLaneId,
+  };
 }
