@@ -6,7 +6,7 @@ import { DropTarget } from 'react-dnd';
 import ItemTypes from '../Kanban/itemTypes';
 
 
-import { deleteLaneRequest, updateLaneRequest, createLaneRequest, editLane, moveBetweenLanes } from './LaneActions';
+import { deleteLaneRequest, updateLaneRequest, createLaneRequest, editLane, moveBetweenLanesRequest, moveBetweenLanes } from './LaneActions';
 import { createNoteRequest } from '../Note/NoteActions';
 
 const mapStateToProps = (state, ownProps) => {
@@ -58,7 +58,7 @@ const noteTarget = {
     */
       // sprawdzić czy docelowa lana nie zawiera notki o id przenoszonej notki
     const czyZawiera = targetProps.lane.notes.find( note => noteId === note);
-    console.log('zawiera przed', zawiera)
+    console.log('zawiera przed', czyZawiera);
     if (targetProps.lane.id !== sourceLaneId && czyZawiera === undefined) { // if (id) target jest inni od źródła oraz nie zawiera id notki to wykonaj
       targetProps.moveBetweenLanes( // to wykonaj metodę
         targetProps.lane.id,
