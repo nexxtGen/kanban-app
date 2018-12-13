@@ -28,22 +28,44 @@ const mapDispatchToProps =  {
   updateLane: updateLaneRequest,
   addNote: createNoteRequest,
   createLane: createLaneRequest, 
-  moveBetweenLanes, 
+  moveBetweenLanes,
 };
 
 //d and d
-const noteTarget = {
+//Kodilla quest add functionality to lane with notes
+const noteTarget = { 
   hover(targetProps, monitor) {
     const sourceProps = monitor.getItem();
     const { id: noteId, laneId: sourceLaneId } = sourceProps;
- 
-    if (!targetProps.lane.notes.length) {
-      targetProps.moveBetweenLanes(
+    
+    /*
+    if (!targetProps.lane.notes.length) { // jeśli nie ma notek w targetowanej lanie
+      targetProps.moveBetweenLanes( // to wykonaj metodę
         targetProps.lane.id,
         noteId,
         sourceLaneId,
       );
-    }
+    } 
+    */
+    /* // Nie działa
+    if (targetProps.lane.id !== sourceLaneId) { // if id docelowej lany jest inne od źródła to 
+        targetProps.moveBetweenLanes( // to wykonaj metodę
+          targetProps.lane.id, // docelowa
+          noteId,   // id noty
+          sourceLaneId,  // id źródła
+        );
+      } 
+    */
+      // sprawdzić czy docelowa lana nie zawiera notki o id przenoszonej notki
+    const czyZawiera = targetProps.lane.notes.find( note => noteId === note);
+    console.log('zawiera przed', zawiera)
+    if (targetProps.lane.id !== sourceLaneId && czyZawiera === undefined) { // if (id) target jest inni od źródła oraz nie zawiera id notki to wykonaj
+      targetProps.moveBetweenLanes( // to wykonaj metodę
+        targetProps.lane.id,
+        noteId,
+        sourceLaneId,        
+      );
+    } // bingo!
   },
  };
 
