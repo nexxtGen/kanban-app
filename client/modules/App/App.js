@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 // Import Style
 import styles from './App.css';
-
 // Import Components
 import Helmet from 'react-helmet';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-
 // Import Actions
 import { toggleAddPost } from './AppActions';
 import { switchLanguage } from '../../modules/Intl/IntlActions';
-
-import { laneError } from '../../modules/Lane/LaneActions';
 
 let DevTools;
 if (process.env.NODE_ENV === 'development') {
@@ -29,24 +24,14 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({isMounted: true}); // eslint-disable-line
-    //this.props.dispatch(app);
+    this.setState({isMounted: true}); // eslint-disable-line    
   }
 
   toggleAddPostSection = () => {
     this.props.dispatch(toggleAddPost());
   };
 
-  render() {
-    /*
-    const isError = this.props.app.laneError;
-    if (isError) {
-      const error = 'errorrrr!!!!';
-    } else {
-      const error = 'brak errrrrooooorrr!';
-    } */
-    console.log('console Lane err', this.props.app.laneError );
-    console.log('console Lane err Body:', this.props.app.laneErrorBody);
+  render() {   
     return (
       <div>
         {this.state.isMounted && !window.devToolsExtension && process.env.NODE_ENV === 'development' && <DevTools />}

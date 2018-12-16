@@ -6,8 +6,6 @@ import {DragSource, DropTarget} from 'react-dnd';
 import {compose} from 'redux';
 import ItemTypes from '../Kanban/itemTypes';
 
-
-// Changes -d&d
 class Note extends React.Component {
   constructor(props) {
     super(props);
@@ -16,8 +14,7 @@ class Note extends React.Component {
   render() {
     const {connectDragSource, connectDropTarget, isDragging,
       editing, children} = this.props;
-
-    // jeśli edytujemy to przepuszczamy komponent (uniemożliwiamy tym samym przeciąganie komponentu edytowanego)
+ 
     const dragSource = editing ? a => a : connectDragSource;
 
     return dragSource(connectDropTarget(
@@ -29,8 +26,7 @@ class Note extends React.Component {
       >
         {children}
       </li>
-    )); 
- 
+    ));  
   }
 }
 
@@ -60,7 +56,7 @@ Note.propTypes = {
   children: PropTypes.any,
 };
 
-//d&d
+//drag & drop implements
 export default compose(
   DragSource(ItemTypes.NOTE, noteSource, (connect, monitor) => ({
     connectDragSource: connect.dragSource(),

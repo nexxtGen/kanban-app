@@ -1,12 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import NotesContainer from '../Note/NotesContainer';
 import Edit from '../../components/Edit'
-
-// Import Style
 import styles from './Lane.css';
-//import { editLane } from '../../../server/controllers/lane.controller';
 
 const Lane = (props) => {
   const { lane, laneNotes, updateLane, addNote, deleteLane, editLane, connectDropTarget } = props;

@@ -1,12 +1,6 @@
 import Lane from '../models/lane';
 import uuid from 'uuid';
 
-/*
-export function getSomething(req, res) {
-  return res.status(200).end();
-}
-*/
-//Implements Add lane/table functionality
 export function addLane(req, res) {
   if (!req.body.name) {
     res.status(403).end();
@@ -39,11 +33,11 @@ export function deleteLane(req, res) {
     if (err) {
       res.status(500).send(err);
     }
-    //delete notes in lane- kodilla quest 2.------
+    //delete notes in lane
     if (lane.notes.length) {
 			lane.notes.forEach(note => note.remove());
     }
-    //-----
+        
     lane.remove(() =>{
       res.status(200).end();
     })

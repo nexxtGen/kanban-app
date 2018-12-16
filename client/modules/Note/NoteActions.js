@@ -1,5 +1,3 @@
-//import uuid from 'uuid';
-
 import callApi from '../../util/apiCaller';
 // Export Constants
 export const CREATE_NOTE = 'CREATE_NOTE';
@@ -16,7 +14,7 @@ export function createNotes(notesData) {
 		notes: notesData,
 	};
 }
-//------------------------
+
 export function createNote(note, laneId) {
     return {
         type: CREATE_NOTE,
@@ -27,13 +25,15 @@ export function createNote(note, laneId) {
 
 export function createNoteRequest(note, laneId) {
     return (dispatch) => {
-      return callApi('notes', 'post', { note, laneId }).then(noteResp => {
-        dispatch(createNote(noteResp, laneId));
-      });
+        return callApi('notes', 'post', { note, laneId }).then(noteResp => {
+            dispatch(createNote(noteResp, laneId));
+        }).catch( err => {
+            console.log('createNoteRequest error: ', err);            
+        });
     };
-  }
-  //---------------------
-  export function updateNote(note) {
+}
+
+export function updateNote(note) {
     return {
         type: UPDATE_NOTE,
         note,
@@ -42,13 +42,15 @@ export function createNoteRequest(note, laneId) {
 
 export function updateNoteRequest(note) {
 	return dispatch => {
-		return callApi(`notes/${note.id}`, 'put', { note }).then(() => {  ////// return kudła
-			dispatch(updateNote(note)); /// kudła!!!!
-		});
+		return callApi(`notes/${note.id}`, 'put', { note }).then(() => {  
+			dispatch(updateNote(note)); 
+		}).catch( err => {
+            console.log('updateNoteRequest error: ', err);            
+        });
 	};
 }
 
-  export function deleteNote(noteId, laneId) {
+export function deleteNote(noteId, laneId) {
     return {
         type: DELETE_NOTE,
         noteId,
@@ -58,19 +60,21 @@ export function updateNoteRequest(note) {
 
 export function deleteNoteRequest(noteId, laneId) {
 	return (dispatch) => {
-		return callApi(`notes/${noteId}`, 'delete', { laneId }).then(() => {  // #returnlivesmatter!!!! 
+		return callApi(`notes/${noteId}`, 'delete', { laneId }).then(() => { 
 			dispatch(deleteNote(noteId, laneId));
-		});
-	};
-}
-export function editNote(noteId) {
-	return {
-		type: EDIT_NOTE,
-		id: noteId,  ///---
+		}).catch( err => {
+            console.log('deleteNoteRequest error: ', err);            
+        });
 	};
 }
 
-//d&d
+export function editNote(noteId) {
+	return {
+		type: EDIT_NOTE,
+		id: noteId, 
+	};
+}
+
 export function moveWithinLane(laneId, targetId, sourceId) {
     return {
       type: MOVE_WITHIN_LANE,

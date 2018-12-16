@@ -7,7 +7,7 @@ const Lanes = ({ lanes }) => {
     return (
         <div className={styles.lanes}>
             {lanes.map(lane => 
-                <Lane className="lane" key={lane.id} lane={lane} draggable="true" />
+                <Lane className="lane" key={lane.id} lane={lane} draggable/>
             )}
         </div>
     );

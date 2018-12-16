@@ -6,16 +6,16 @@ const router = new Router();
 // Get all Lanes
 router.route('/lanes').get(LaneController.getLanes);
 
-//Add a new Lane
+// Add a new Lane
 router.route('/lanes').post(LaneController.addLane);
 
-//delete Lane
+// delete Lane
 router.route('/lanes/:laneId').delete(LaneController.deleteLane);
 
-//Kodilla quest edit lane name
+// edit lane name
 router.route('/lanes/:laneId').put(LaneController.editLane);
 
-//Kodilla quest move note netweenLane
+// move note netweenLane
 router.route('/lanes/:laneId/moveBetween').put(LaneController.moveBetweenLanes);
 
 export default router;
