@@ -22,10 +22,12 @@ const mapDispatchToProps =  {
   addNote: createNoteRequest,
   createLane: createLaneRequest, 
   moveBetweenLanes,
+  moveBetweenLanesRequest,
 };
 
 const noteTarget = { 
-  hover(targetProps, monitor) {
+  
+  drop(targetProps, monitor, component) {
     const sourceProps = monitor.getItem();
     const { id: noteId, laneId: sourceLaneId } = sourceProps;   
     const checkNoteInTargetLane = targetProps.lane.notes.find( note => noteId === note);
@@ -36,8 +38,9 @@ const noteTarget = {
         noteId,
         sourceLaneId,        
       );
-    }
-  },
+    console.log('DROPPED, CALL TO SERVER...', props, monitor, component);
+  }
+  }
  };
 
 export default compose(

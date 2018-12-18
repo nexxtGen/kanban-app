@@ -66,9 +66,21 @@ export function moveBetweenLanes(req, res) {
     //4 Nastepnie znaleźć docelową lanę
     //5. Przeniesć element pushem do tablicy notes targetowanej lany
     const targetNote = lane.notes.find( note => note.id === req.body.noteId); //1, 2
-    console.log('target note const', targetNote)
-    const test = lane.notes.map(note => note.id !== req.body.noteId );
-    console.log('lane controller test move note', test);
+    //console.log('target note const', targetNote)
+    //const test = lane.notes.map(note => note.id !== req.body.noteId );
+    //console.log('lane controller test move note', test);
+    /*
+    lane.notes.findOne({ id: req.body.noteId}, function(err, note){
+      note.remove();
+    })
+    */
+    lane.notes.find( {id: req.body.noteId}).exec((err, note) =>{
+      if (err) {
+        res.status(500).send(err);
+      }
+      note.remove();
+    });
+    /*
     lane.notes.map(note => note.id !== req.body.noteId ); //3
     lane.save(err => {
       if (err) {
@@ -76,7 +88,7 @@ export function moveBetweenLanes(req, res) {
 			}
 			res.json(lane);
     });
-
+    */
     Lane.findOne({ id: req.body.targetLaneId}).then(target => { //4
       target.notes.push(targetNote); //5
       target.save(err => {
