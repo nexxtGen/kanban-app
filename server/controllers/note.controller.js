@@ -29,8 +29,7 @@ export function addNote(req, res) {
       });
   });
 }
-// Quest by kodilla
-//delete single note - kodilla quest 1  - edytować tak by notka była usuwana takze z z Lane !!
+
 export function deleteNote(req, res) {
   Note.findOne({ id: req.params.noteId }).exec((err, note) => {
     if (err) {
@@ -41,7 +40,7 @@ export function deleteNote(req, res) {
     });
   });
 }
-//quest edit note 
+
 export function editNote(req, res) {
 	Note.findOneAndUpdate({ id: req.params.noteId }, { $set: {task: req.body.note.task}}).exec((err, note) => {
 		if (err) {

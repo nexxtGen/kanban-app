@@ -2,8 +2,9 @@
 .Lane {
     box-sizing: border-box;
     padding: 10px;
-    margin-top: 15px;
+    margin: 15px;
     background-color: azure;
+    width: 250px;
 }
 
 .LaneHeader{
@@ -14,7 +15,10 @@
 }
 
 .LaneName{
-
+    box-sizing: border-box;
+    background-color: rgb(119, 255, 255);   
+    margin: 5px auto; 
+    font-size: 20px;
 }
 .LaneDelete {
     
@@ -25,8 +29,8 @@
     margin: 10px;
     padding: 10px;
     background-color: rgb(192, 250, 231);
-    max-width: 800px;
+    max-width: 1200px;
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
 }

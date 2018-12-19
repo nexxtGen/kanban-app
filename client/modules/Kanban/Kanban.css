@@ -1,6 +1,8 @@
 /* Kanban styles */
 .AddLane {
     font-size: 16px;
+    margin: 10px auto;
+    text-align: center;
 }
 
 .hTitle {
@@ -8,7 +10,6 @@
     font-size: 30px;
 }
 
-.lanes {
-    box-sizing: border-box;
-    padding: 10px;
+.container {
+    text-align: center;
 }

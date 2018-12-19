@@ -3,21 +3,24 @@ import PropTypes from 'prop-types';
 import styles from './Edit.css';
 
 export default class Edit extends Component {
-    //if user press enter => then. run method finishEdit
+    
     checkEnter = e => {
         if (e.key === 'Enter') {
             this.finishEdit(e);
         }
     }
+
     finishEdit = e => {
         const value = e.target.value;
         if (this.props.onUpdate) {
             this.props.onUpdate(value.trim());
         }
     }
+
     renderDelete = () => {
         return <button className={styles.delete} onClick={this.props.onDelete}>X</button>
     }
+    
     renderValue = () => {        
         const { value, onDelete, onValueClick } = this.props;
         
